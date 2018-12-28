@@ -1,5 +1,6 @@
 use std::fmt;
 
+#[derive(PartialEq, Clone, Debug)]
 pub enum Frequency {
     Secondly,
     Minutely,
@@ -33,8 +34,18 @@ pub struct RecurrenceRule {
     pub recur_rule_parts: Vec<RecurRulePart>,
 }
 
+impl RecurrenceRule {
+    pub fn new_single() -> Self {
+        Self { recur_rule_parts: vec![] }
+    }
+
+    pub fn new_with_parts(recur_rule_parts: Vec<RecurRulePart>) -> Self {
+        Self { recur_rule_parts }
+    }
+}
+
 impl fmt::Display for RecurrenceRule {
-    fn  fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "RRULE:")?;
 
         for part in self.recur_rule_parts.iter() {
