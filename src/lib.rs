@@ -29,16 +29,20 @@ pub enum RecurRulePart {
 }
 
 pub struct RecurrenceRule {
-    recur_rule_part: RecurRulePart,
+    pub recur_rule_parts: Vec<RecurRulePart>,
 }
 
 impl fmt::Display for RecurrenceRule {
     fn  fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "RRULE:")?;
 
-        match &self.recur_rule_part {
-            RecurRulePart::Freq(freq) => write!(f, "FREQ={}", freq),
+        for part in self.recur_rule_parts.iter() {
+            match part {
+                RecurRulePart::Freq(freq) => write!(f, "FREQ={}", freq)?,
+            };
         }
+
+        Ok(())
     }
 }
 
@@ -49,7 +53,7 @@ mod tests {
     #[test]
     fn rr_with_freq_monthly_display() {
         let rr = RecurrenceRule {
-            recur_rule_part: RecurRulePart::Freq(Frequency::Monthly),
+            recur_rule_parts: vec![RecurRulePart::Freq(Frequency::Monthly)],
         };
 
         assert_eq!(format!("{}", rr), "RRULE:FREQ=MONTHLY");

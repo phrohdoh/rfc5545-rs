@@ -28,7 +28,7 @@ use rfc5545::{RecurrenceRule, RecurRulePart, Frequency};
 
 fn main() {
     let rule = RecurrenceRule {
-        recur_rule_part: RecurRulePart::Freq(Frequency::Monthly),
+        recur_rule_parts: vec![RecurRulePart::Freq(Frequency::Monthly)],
     };
 
     println!("{}", rule); // => RRULE:FREQ=MONTHLY
