@@ -36,3 +36,11 @@ fn main() {
 ```
 
 Currently this project only creates recurrence rule strings, it does not parse strings into typed object.
+
+### Running the examples in this codebase
+
+```
+$ cargo run --example print
+```
+
+Change `print` to the name of whichever example you'd like to run.
