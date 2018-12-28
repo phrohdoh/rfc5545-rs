@@ -34,3 +34,5 @@ fn main() {
     println!("{}", rule); // => RRULE:FREQ=MONTHLY
 }
 ```
+
+Currently this project only creates recurrence rule strings, it does not parse strings into typed object.
