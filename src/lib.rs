@@ -28,6 +28,7 @@ impl fmt::Display for Frequency {
 pub enum RecurRulePart {
     Freq(Frequency),
     Count(u64),
+    Interval(u64),
 }
 
 pub struct RecurrenceRule {
@@ -52,6 +53,7 @@ impl fmt::Display for RecurrenceRule {
             match part {
                 RecurRulePart::Freq(freq) => write!(f, "FREQ={}", freq)?,
                 RecurRulePart::Count(count) => write!(f, "COUNT={}", count)?,
+                RecurRulePart::Interval(interval) => write!(f, "INTERVAL={}", interval)?,
             };
 
             write!(f, ";")?;
@@ -84,19 +86,30 @@ mod tests {
     }
 
     #[test]
-    fn rr_with_freq_monthly_count_5_display() {
-        let rr = RecurrenceRule {
-            recur_rule_parts: vec![
-                RecurRulePart::Freq(Frequency::Monthly),
-                RecurRulePart::Count(5)
-            ],
-        };
+    fn rr_with_interval_5_display() {
+        let rr = RecurrenceRule::new_with_parts(vec![
+            RecurRulePart::Interval(5),
+        ]);
+
+        let sut = rr.to_string();
+        assert_eq!(sut, "RRULE:INTERVAL=5;");
+    }
+
+    #[test]
+    fn rr_multiple_parts() {
+        // Every 2 months for a total of 9 occurences (over 2 * 9 months)
+        let rr = RecurrenceRule::new_with_parts(vec![
+            RecurRulePart::Freq(Frequency::Monthly),
+            RecurRulePart::Count(9),
+            RecurRulePart::Interval(2),
+        ]);
 
         // TODO: Test for `;` between each part
         // TODO: Test that parts do not contain whitespace (surrounding only?)
         let sut = format!("{}", rr);
         assert!(sut.starts_with("RRULE:"));
+        assert!(sut.contains("INTERVAL=2"));
         assert!(sut.contains("FREQ=MONTHLY"));
-        assert!(sut.contains("COUNT=5"));
+        assert!(sut.contains("COUNT=9"));
     }
 }
