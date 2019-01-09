@@ -36,10 +36,6 @@ pub struct RecurrenceRule {
 }
 
 impl RecurrenceRule {
-    pub fn new_single() -> Self {
-        Self { recur_rule_parts: vec![] }
-    }
-
     pub fn new_with_parts(recur_rule_parts: Vec<RecurRulePart>) -> Self {
         Self { recur_rule_parts }
     }
