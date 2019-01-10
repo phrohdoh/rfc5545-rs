@@ -39,7 +39,7 @@ fn main() {
 }
 ```
 
-Currently this project only creates recurrence rule strings, it does not parse strings into typed object.
+Currently this project only creates recurrence rule strings, it does not parse strings into strongly-typed objects.
 
 ### Running the examples in this codebase
 
