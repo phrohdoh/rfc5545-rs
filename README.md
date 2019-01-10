@@ -4,6 +4,10 @@ The aim of this library is to implement https://tools.ietf.org/html/rfc5545 star
 
 Contributions are welcome.
 
+### License
+
+See the [LICENSE](./LICENSE) file.
+
 ### Building
 
 This project is built with stable Rust (2018 edition) using the Cargo project manager:

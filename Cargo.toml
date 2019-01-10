@@ -1,6 +1,7 @@
 [package]
 name = "rfc5545"
-description = "https://tools.ietf.org/html/rfc5545"
 version = "0.0.1"
+description = "https://tools.ietf.org/html/rfc5545"
 authors = ["Taryn Hill <taryn@phrohdoh.com>"]
+license-file = "LICENSE"
 edition = "2018"
